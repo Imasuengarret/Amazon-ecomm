@@ -1,6 +1,8 @@
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js'
 
 let productsHtml = '';
-products.filter((product) => {
+products.forEach((product) => {
   productsHtml = productsHtml + `
      <div class="product-container">
           <div class="product-image-container">
@@ -24,7 +26,7 @@ products.filter((product) => {
             $${(product.priceCents / 100).toFixed(2)}  
           </div>
 
-          <div class="product-quantity-container">
+          <div class="product-quantity-container js-dropdown">
             <select>
               <option selected value="1">1</option>
               <option value="2">2</option>
@@ -83,7 +85,8 @@ products.filter((product) => {
 
             document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
 
-         
+       
+            
             
         })
     })
