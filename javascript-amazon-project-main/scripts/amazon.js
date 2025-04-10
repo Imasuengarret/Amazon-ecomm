@@ -63,7 +63,7 @@ products.filter((product) => {
             let matchingItem;
 
             cart.forEach((item) =>{
-                if(productId === item.name){
+                if(productId === item.productId){
                     matchingItem = item;
                 }
             })
@@ -75,12 +75,15 @@ products.filter((product) => {
                     Quantity: 1
                 })
             }
-            if(matchingItem === productId){
-                matchingItem += 1;
-            }
+
+            let cartQuantity = 0;
+            cart.forEach((item) =>{
+                cartQuantity += item.Quantity
+            })
+
+            document.querySelector('.js-cart-quantity').innerHTML = cartQuantity
 
          
-            console.log(cart);
             
         })
     })
