@@ -58,11 +58,9 @@
 .checkout-header-middle-section {
   flex: 1;
   flex-shrink: 0;
-  text-align: center;
-
+  align-items: center;
   font-size: 25px;
   font-weight: 500;
-
   display: flex;
   justify-content: center;
 }
