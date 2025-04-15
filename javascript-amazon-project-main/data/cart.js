@@ -1,3 +1,4 @@
+// import { deliveryOptions } from "./deliveryoptions";
 export let cart = JSON.parse(
   localStorage.getItem("cart")
 ); /* JSON.parse to convert to an array*/
@@ -6,11 +7,13 @@ if (!cart) {
     {
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       Quantity: 2,
+      deliveryOptionId: '1'
     },
     {
       productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
       Quantity: 1,
-    },
+      deliveryOptionId: '2'
+    }
   ];
 }
 
@@ -20,6 +23,7 @@ const saveToStorage = () => {
     JSON.stringify(cart)
   ); /* JSON.stringify converts to string becos local storage can only save strings*/
 };
+
 
 export const addToCart = (productId) => {
   let matchingItem;
@@ -35,6 +39,7 @@ export const addToCart = (productId) => {
     cart.push({
       productId: productId,
       Quantity: 1,
+      deliveryOptionId: '1'
     });
   }
   saveToStorage();
