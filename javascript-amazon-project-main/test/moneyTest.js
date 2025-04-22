@@ -21,4 +21,4 @@ if (formatCurrency(2000.5) === '20.01') {
     console.log('failed');
 }
 /* these are called test cases 1. basic test cases and edge cases */
-// group of related test is vcalled a test suite
+// group of related test is called a test suite
