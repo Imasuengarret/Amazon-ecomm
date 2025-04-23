@@ -1,4 +1,4 @@
-import {formatCurrency} from '../scripts/utils/money.js'
+ import {formatCurrency} from '../scripts/utils/money.js'
 
 console.log('test suite: formatCurrency');
 console.log('convert cents into dollar');
@@ -8,7 +8,7 @@ if(formatCurrency(2095) === '20.95'){
 }else {
     console.log('failed');   
 }
-console.log('workss with zero(0)');
+console.log('works with zero(0)');
 if(formatCurrency(0) === '0.00'){
     console.log('passed');
 }else {
