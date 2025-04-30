@@ -1,4 +1,3 @@
-// import { deliveryOptions } from "./deliveryoptions";
 export let cart;
 loadFromStorage();
 
