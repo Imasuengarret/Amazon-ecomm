@@ -1,7 +1,7 @@
 export let cart;
 loadFromStorage();
 
-export function loadFromStorage(){
+export function loadFromStorage() {
   cart = JSON.parse(
     localStorage.getItem("cart")
   ); /* JSON.parse to convert to an array*/
@@ -10,13 +10,13 @@ export function loadFromStorage(){
       {
         productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         Quantity: 2,
-        deliveryOptionId: '1'
+        deliveryOptionId: "1",
       },
       {
         productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
         Quantity: 1,
-        deliveryOptionId: '2'
-      }
+        deliveryOptionId: "2",
+      },
     ];
   }
 }
@@ -27,7 +27,6 @@ const saveToStorage = () => {
     JSON.stringify(cart)
   ); /* JSON.stringify converts to string becos local storage can only save strings*/
 };
-
 
 export const addToCart = (productId) => {
   let matchingItem;
@@ -43,7 +42,7 @@ export const addToCart = (productId) => {
     cart.push({
       productId: productId,
       Quantity: 1,
-      deliveryOptionId: '1'
+      deliveryOptionId: "1",
     });
   }
   saveToStorage();
@@ -62,7 +61,7 @@ export function removeFromCart(productId) {
   saveToStorage();
 }
 
- export const updateDeliveryOptions = (productId, deliveryOptionId) =>{
+export const updateDeliveryOptions = (productId, deliveryOptionId) => {
   let matchingItem;
 
   cart.forEach((cartItem) => {
@@ -70,6 +69,16 @@ export function removeFromCart(productId) {
       matchingItem = cartItem;
     }
   });
-  matchingItem.deliveryOptionId = deliveryOptionId
-  saveToStorage()
+  matchingItem.deliveryOptionId = deliveryOptionId;
+  saveToStorage();
+};
+export function loadCart(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener("load", () => {
+    console.log(xhr.response);
+
+    fun();
+  });
+  xhr.open("GET", "https://supersimplebackend.dev/cart");
+  xhr.send();
 }
