@@ -1,5 +1,5 @@
-import {formatCurrency} from '../scripts/utils/money.js'
-export const getProduct = (productId) =>{
+import { formatCurrency } from "../scripts/utils/money.js";
+export const getProduct = (productId) => {
   let matchingProduct;
 
   products.forEach((product) => {
@@ -8,7 +8,7 @@ export const getProduct = (productId) =>{
     }
   });
   return matchingProduct;
-}
+};
 class Product {
   id;
   image;
@@ -18,26 +18,26 @@ class Product {
 
   constructor(productDetails) {
     this.id = productDetails.id;
-    this.image = productDetails.image
-    this.name = productDetails.name
-    this.rating = productDetails.rating
-    this.priceCents = productDetails.priceCents
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
   }
 
   getStarsUrl() {
-    return `images/ratings/rating-${this.rating.stars * 10}.png`
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }
   getPrice() {
-    return `$${formatCurrency(this.priceCents)}`
+    return `$${formatCurrency(this.priceCents)}`;
   }
   extraInfoHTML() {
-    return '';
+    return "";
   }
 }
-class clothing extends Product{
+class clothing extends Product {
   sizeChartLink;
   constructor(productDetails) {
-    super(productDetails)
+    super(productDetails);
     this.sizeChartLink = productDetails.sizeChartLink;
   }
   extraInfoHTML() {
@@ -49,32 +49,52 @@ class clothing extends Product{
 function logThis() {
   console.log(this);
 }
-logThis()
-logThis.call('Yo')
+logThis();
+logThis.call("Yo");
 
 const object3 = {
-  method: () =>{
+  method: () => {
     console.log(this);
-  }}
-  object3.method()
- export let products = [];
- export function loadProducts(fun) {
-   const xhr = new XMLHttpRequest();
-   xhr.addEventListener('load', () =>{
-     products = JSON.parse(xhr.response).map((productDetails) =>{
-         if(productDetails.type === 'clothing') {
-          return new clothing(productDetails)
-        }
-         return new Product(productDetails);
-      });
-      console.log('load products ');
-      fun()
+  },
+};
+object3.method();
+export let products = [];
+
+export function loadProductsFetch() {
+  // fetch makes a get request and uses a promise to wait for response
+  const promise = fetch("https://supersimplebackend.dev/products")
+    .then((response) => {
+      return response.json();
     })
-    xhr.open('GET', 'https://supersimplebackend.dev/products');
-  xhr.send()
- }
-
-
+    .then((productsData) => {
+      products = productsData.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new clothing(productDetails);
+        }
+        return new Product(productDetails);
+      });
+      console.log("load products ");
+    });
+  return promise;
+}
+// loadProductsFetch().then(() => {
+//   console.log("next step");
+// });
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener("load", () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === "clothing") {
+        return new clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+    console.log("load products ");
+    fun();
+  });
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
 
 // export const products = [
 //   {
@@ -553,4 +573,3 @@ const object3 = {
 //   }
 //   return new Product(productDetails);
 // });
-
