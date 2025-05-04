@@ -6,7 +6,7 @@ describe("test suite: addToCart", () => {
         spyOn(localStorage, 'setItem');
       return JSON.stringify([{
         productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-        Quantity: 1,
+        quantity: 1,
         deliveryOptionId: '1'
       }]);
     });
@@ -15,7 +15,7 @@ describe("test suite: addToCart", () => {
     expect(cart.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(cart[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
-    expect(cart[0].Quantity).toEqual(2);
+    expect(cart[0].quantity).toEqual(2);
     
   });
 
@@ -31,6 +31,6 @@ describe("test suite: addToCart", () => {
     expect(cart.length).toEqual(1);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(cart[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
-    expect(cart[0].Quantity).toEqual(1);
+    expect(cart[0].quantity).toEqual(1);
   });
 });
